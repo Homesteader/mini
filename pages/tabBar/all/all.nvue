@@ -1,5 +1,6 @@
 <template>
 	<view class="uni-container">
+		
 		<view class="uni-panel" v-for="(item, index) in list" :key="item.id">
 			<view class="uni-panel-h" :class="item.open ? 'uni-panel-h-on' : ''" @click="triggerCollapse(index)">
 			    <text class="uni-panel-text">{{item.name}}</text>
@@ -16,12 +17,6 @@
 </template>
 
 <script>
-	
-	var domModule = weex.requireModule('dom');
-	domModule.addRule('fontFace', {
-		'fontFamily': "uniicons",
-		'src': "url('/static/uni.ttf')"
-	});
 	
 	export default {
 		data(){
@@ -73,5 +68,15 @@
 </script>
 
 <style>
-@import '../../../common/uni-nvue.css';
+	@import '../../../common/uni-nvue.css';
+	@font-face {
+		font-family: uniicons;
+		src: url("../../../static/uni.ttf") format("truetype");
+	}
+	
+	.uni-icons {
+		font-family: uniicons;
+		text-decoration: none;
+		text-align: center;
+	}
 </style>

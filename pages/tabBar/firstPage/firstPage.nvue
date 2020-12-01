@@ -1,0 +1,208 @@
+<template>
+	<view>
+		<view class="content">
+			<image class="logo" src="../../../static/index/logo.png"></image>
+			<text class="title">{{title}}</text>
+		</view>
+		
+		<view class="uni-margin-wrap">
+			<swiper class="swiper" circular :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
+				<swiper-item>
+					<image src="../../../static/index/pic1.jpg" style="height: 100%; width: 100%;"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="../../../static/index/pic2.jpg" style="height: 100%; width: 100%;"></image>
+				</swiper-item>
+			</swiper>
+		</view>
+		
+		<view class="text-area" style="margin-bottom: 20rpx;">
+			<text style="font-weight:bold; display: flex; justify-content: center; padding: 30rpx;">{{"SERVICE CENTER"}}</text>
+			<text style="font-size: 20rpx; display: flex; justify-content: center; margin-bottom: 5rpx;">{{"工作时间：10:00AM-9:00PM"}}</text>
+			<text style="font-size: 20rpx; display: flex; justify-content: center;">{{"部分产品 下单后定制 数量有限"}}</text>
+			<text style="font-size: 20rpx; display: flex; justify-content: center; padding: 5rpx;">{{"工作时间外 我们调香喝茶 不在线"}}</text>
+		</view>
+		
+		<view v-for="(item, index) in activityList" :key="index">
+			<view style="height: 200rpx; width: 100%; margin-top: 1rpx;">
+				<image class="image" :src="item.url" mode="heightFix"></image>
+			</view>
+		</view>
+		
+		<view style="height: 180rpx;width: 95%; margin-top: 10rpx;margin-left: 10rpx; margin-right: 10rpx;" @click="getDiscont()">
+			<cover-image src="../../../static/index/coupon.png" :mode="heightFix"></cover-image>
+		</view>
+		
+		<view>
+			<uni-notice-bar speed="60"  iconColor="#de8c17" background-color="#e4e4eb" color="#000000" :show-icon="true" :scrollable="true" :single="true" text="关注微信公众号 【观夏tosummer】,领取10元新人优惠券,产品内无附赠,产品装箱方式不接受装订,运输过程中不可避免因磕碰产生碎屑" />
+		</view>
+		
+		
+		<view class="uni-panel" v-for="(item, index) in list" :key="item.id">
+			<view class="uni-panel-h" :class="item.open ? 'uni-panel-h-on' : ''" @click="triggerCollapse(index)">
+			    <text class="uni-panel-text">{{item.name}}</text>
+			    <text class="uni-panel-icon uni-icon" :class="item.open ? 'uni-panel-icon-on' : ''">{{item.pages ? '&#xe581;' : '&#xe470;'}}</text>
+			</view>
+			<view class="uni-panel-c" v-if="item.open">
+			    <view class="uni-navigate-item" v-for="(item2,key) in item.pages" :key="key" @click="goDetailPage(item2)">
+			        <text class="uni-navigate-text">{{item2.name ? item2.name : item2}}</text>
+			        <text class="uni-navigate-icon uni-icon">&#xe470;</text>
+			    </view>
+			</view>
+		</view>
+		
+		
+		
+	</view>
+</template>
+
+<script>
+	export default {
+		data(){
+			return {
+				title:"网店观夏tosummer",
+				list:[{
+						id: 'view',
+						name: '视图容器',
+						open: false,
+						pages: [
+							'view',
+							'scroll-view'
+						]
+					},
+					{
+						id: 'content',
+						name: '基础内容',
+						open: false,
+						pages: ['text','rich-text','progress']
+						
+					},
+				],
+				info: [{
+						colorClass: 'uni-bg-red',
+						url: '../../../static/index/pic1.jpg',
+						content: '内容 A'
+					},
+					{
+						colorClass: 'uni-bg-green',
+						url: '../../../static/index/pic2.jpg',
+						content: '内容 B'
+					},
+				],
+				activityList:[{
+						url: '../../../static/index/item1.jpg',
+					},
+					{
+						url: '../../../static/index/item2.jpg',
+					},
+					{
+						url: '../../../static/index/item3.jpg',
+					},
+					{
+						url: '../../../static/index/item4.jpg',
+					},
+				],
+				indicatorDots: true,
+				autoplay: true,
+				interval: 4000,
+				duration: 500
+			}
+		},
+		onLoad() {
+		},
+		methods:{
+			triggerCollapse(e){
+				if (!this.list[e].pages) {
+				    this.goDetailPage(this.list[e].url);
+				    return;
+				}
+				for (var i = 0; i < this.list.length; ++i) {
+				    if (e === i) {
+				        this.list[i].open = !this.list[e].open;
+				    } else {
+				        this.list[i].open = false;
+				    }
+				}
+			},
+			goDetailPage(e){
+				if (typeof e === 'string') {
+				    uni.navigateTo({
+				        url: '/pages/component/' + e + '/' + e
+				    })
+				} else {
+				    uni.navigateTo({
+				        url: e.url
+				    })
+				}
+			},
+			change(e) {
+				this.current = e.detail.current
+			},
+			getDiscont(e){
+				uni.showToast({
+					title:'已领取',
+					duration:1500
+				})
+			},
+		}
+	}
+</script>
+
+<style>
+	@import '../../../common/uni-nvue.css';
+	@font-face {
+		font-family: uniicons;
+		src: url("../../../static/uni.ttf") format("truetype");
+	}
+	
+	.uni-icons {
+		font-family: uniicons;
+		text-decoration: none;
+		text-align: center;
+	}
+	
+	.content {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: flex-start;
+		margin-bottom: 20rpx;
+		margin-top: 20rpx;
+	}
+	
+	.logo {
+		height: 35rpx;
+		width: 30rpx;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
+	}
+	
+	.title {
+		font-size: 20rpx;
+		color: #8f8f94;
+	}
+	
+	.text-area {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.swiper {
+		height: 1000rpx;
+		margin-left: 0rpx;
+		margin-right: 0rpx;
+	}
+	
+	.swiper-msg {
+		height: 100%;
+		margin-left: 0rpx;
+		margin-right: 0rpx;
+	}
+	
+	.controls-title{
+		width: 100%;
+		text-align: center;
+		color: #000000;
+	}
+
+</style>
