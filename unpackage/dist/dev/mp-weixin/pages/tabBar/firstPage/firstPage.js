@@ -12,7 +12,7 @@
 /* 10 */,
 /* 11 */
 /*!*********************************************************************************!*\
-  !*** E:/code/wx/demo/main.js?{"page":"pages%2FtabBar%2FfirstPage%2FfirstPage"} ***!
+  !*** E:/code/wx/mini/main.js?{"page":"pages%2FtabBar%2FfirstPage%2FfirstPage"} ***!
   \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -27,7 +27,7 @@ createPage(_firstPage.default);
 /***/ }),
 /* 12 */
 /*!*************************************************************!*\
-  !*** E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue ***!
+  !*** E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue ***!
   \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -69,7 +69,7 @@ component.options.__file = "pages/tabBar/firstPage/firstPage.nvue"
 /***/ }),
 /* 13 */
 /*!********************************************************************************************!*\
-  !*** E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=template&id=83dd9f32& ***!
+  !*** E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=template&id=83dd9f32& ***!
   \********************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -90,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 14 */
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=template&id=83dd9f32& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=template&id=83dd9f32& ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -104,6 +104,12 @@ __webpack_require__.r(__webpack_exports__);
 var components = {
   uniNoticeBar: function() {
     return __webpack_require__.e(/*! import() | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/components/uni-notice-bar/uni-notice-bar.vue */ 51))
+  },
+  uniPopup: function() {
+    return Promise.all(/*! import() | components/uni-popup/uni-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-popup/uni-popup")]).then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 58))
+  },
+  uniPopupShare: function() {
+    return __webpack_require__.e(/*! import() | components/uni-popup-share/uni-popup-share */ "components/uni-popup-share/uni-popup-share").then(__webpack_require__.bind(null, /*! @/components/uni-popup-share/uni-popup-share.vue */ 67))
   }
 }
 var render = function() {
@@ -120,7 +126,7 @@ render._withStripped = true
 /***/ }),
 /* 15 */
 /*!**************************************************************************************!*\
-  !*** E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=script&lang=js& ***!
+  !*** E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=script&lang=js& ***!
   \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -135,7 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 16 */
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -228,28 +234,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
       title: "网店观夏tosummer",
-      list: [{
-        id: 'view',
-        name: '视图容器',
-        open: false,
-        pages: [
-        'view',
-        'scroll-view'] },
-
-
-      {
-        id: 'content',
-        name: '基础内容',
-        open: false,
-        pages: ['text', 'rich-text', 'progress'] }],
-
-
-
       info: [{
         colorClass: 'uni-bg-red',
         url: '../../../static/index/pic1.jpg',
@@ -277,51 +274,96 @@ var _default =
       indicatorDots: true,
       autoplay: true,
       interval: 4000,
-      duration: 500 };
+      duration: 500,
+      data: [],
+      loadMoreText: "加载中...",
+      showLoadMore: false,
+      max: 0 };
 
   },
   onLoad: function onLoad() {
+    this.initData();
+  },
+  onUnload: function onUnload() {
+    this.max = 0,
+    this.data = [],
+    this.loadMoreText = "加载更多",
+    this.showLoadMore = false;
+  },
+  onReachBottom: function onReachBottom() {var _this = this;
+    console.log("onReachBottom");
+    if (this.max > 40) {
+      this.loadMoreText = "没有更多数据了!";
+      return;
+    }
+    this.showLoadMore = true;
+    setTimeout(function () {
+      _this.setListData();
+    }, 300);
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    console.log('onPullDownRefresh');
+    this.initData();
   },
   methods: {
-    triggerCollapse: function triggerCollapse(e) {
-      if (!this.list[e].pages) {
-        this.goDetailPage(this.list[e].url);
-        return;
-      }
-      for (var i = 0; i < this.list.length; ++i) {
-        if (e === i) {
-          this.list[i].open = !this.list[e].open;
-        } else {
-          this.list[i].open = false;
-        }
-      }
-    },
-    goDetailPage: function goDetailPage(e) {
-      if (typeof e === 'string') {
-        uni.navigateTo({
-          url: '/pages/component/' + e + '/' + e });
-
-      } else {
-        uni.navigateTo({
-          url: e.url });
-
-      }
-    },
-    change: function change(e) {
-      this.current = e.detail.current;
-    },
     getDiscont: function getDiscont(e) {
       uni.showToast({
         title: '已领取',
-        duration: 1500 });
+        icon: 'none' });
 
+    },
+    initData: function initData() {var _this2 = this;
+      setTimeout(function () {
+        _this2.max = 0;
+        _this2.data = [];
+        var data = [];
+        _this2.max += 10;
+        for (var i = _this2.max - 9; i < _this2.max + 1; i++) {
+
+          var item = [];
+          for (var j = 0; j <= 1; j++)
+          {
+            var info = {
+              url: '../../../static/shop/item1.jpg',
+              price: 10 + j,
+              desc: '年度限定-西溪桃花香氛礼盒（关注观夏微信公众号，获取礼包）' };
+
+            item.push(info);
+          }
+          data.push(item);
+        }
+        _this2.data = _this2.data.concat(data);
+        uni.stopPullDownRefresh();
+      }, 300);
+    },
+    setListData: function setListData() {
+      var data = [];
+      this.max += 10;
+      for (var i = this.max - 9; i < this.max + 1; i++) {
+        var item = [];
+        for (var j = 0; j <= 1; j++)
+        {
+          var info = {
+            url: '../../../static/shop/item2.jpg',
+            price: 1 + j,
+            desc: '年度限定-西溪桃花香氛礼盒（关注观夏微信公众号，获取礼包）' };
+
+          item.push(info);
+        }
+        data.push(item);
+      }
+      this.data = this.data.concat(data);
+    },
+    buyGoods: function buyGoods(e)
+    {
+      this.$refs.popupShare.open();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 17 */
 /*!**********************************************************************************************!*\
-  !*** E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=0&lang=css& ***!
+  !*** E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=0&lang=css& ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -336,7 +378,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 18 */
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=0&lang=css& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=0&lang=css& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -348,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 19 */
 /*!**********************************************************************************************!*\
-  !*** E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=1&lang=css& ***!
+  !*** E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=1&lang=css& ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -363,7 +405,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 20 */
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/demo/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=1&lang=css& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/code/wx/mini/pages/tabBar/firstPage/firstPage.nvue?vue&type=style&index=1&lang=css& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

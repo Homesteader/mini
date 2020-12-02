@@ -34,24 +34,32 @@
 		</view>
 		
 		<view>
-			<uni-notice-bar speed="60"  iconColor="#de8c17" background-color="#e4e4eb" color="#000000" :show-icon="true" :scrollable="true" :single="true" text="关注微信公众号 【观夏tosummer】,领取10元新人优惠券,产品内无附赠,产品装箱方式不接受装订,运输过程中不可避免因磕碰产生碎屑" />
+			<uni-notice-bar speed=60  iconColor="#de8c17" background-color="#e4e4eb" color="#909090" :show-icon="true" :scrollable="true" :single="true" text="关注微信公众号 【观夏tosummer】,领取10元新人优惠券,产品内无附赠,产品装箱方式不接受装订,运输过程中不可避免因磕碰产生碎屑" />
+		</view>
+
+		<view>
+			<view class="text" style="display: flex; flex-direction: row;" v-for="(item,index) in data" :key="index">
+				<view style="display: flex;flex-direction: column; width: 50%;" v-for="(info,id) in item" :key="id">
+					<image style="width: 100%; height: 400rpx;" :src="info.url" :mode="scaleToFill"></image>
+
+					<view style="height: 95rpx;">
+						<text class="topic_cont_text">{{info.desc}}</text>
+					</view>
+					
+					<view style="display: flex;flex-direction: row; height: 50rpx;margin-top: 20rpx;margin-bottom: 20rpx;align-items: center;">
+						<text style="font-size: 30; color: #7ac47e;margin-left: 20rpx; width: 30%;">{{"￥"+info.price}}</text>
+						<view style="align-items: flex-end; width: 70%;" @click="buyGoods(info.price)"> 
+							<image style="width: 100rpx; height: 60rpx; margin-right: 10rpx;" src="../../../static/shop/buyBtn.png" mode="scaleToFill"></image>
+						</view>			
+					</view>
+				</view>
+			</view>
+			<view class="uni-loadmore" v-if="showLoadMore" style="align-items: center; color: #8f8f8f;">{{loadMoreText}}</view>
 		</view>
 		
-		
-		<view class="uni-panel" v-for="(item, index) in list" :key="item.id">
-			<view class="uni-panel-h" :class="item.open ? 'uni-panel-h-on' : ''" @click="triggerCollapse(index)">
-			    <text class="uni-panel-text">{{item.name}}</text>
-			    <text class="uni-panel-icon uni-icon" :class="item.open ? 'uni-panel-icon-on' : ''">{{item.pages ? '&#xe581;' : '&#xe470;'}}</text>
-			</view>
-			<view class="uni-panel-c" v-if="item.open">
-			    <view class="uni-navigate-item" v-for="(item2,key) in item.pages" :key="key" @click="goDetailPage(item2)">
-			        <text class="uni-navigate-text">{{item2.name ? item2.name : item2}}</text>
-			        <text class="uni-navigate-icon uni-icon">&#xe470;</text>
-			    </view>
-			</view>
-		</view>
-		
-		
+		<uni-popup id="popupShare" ref="popupShare" type="share">
+			<uni-popup-share title="分享到" @select="select"></uni-popup-share>
+		</uni-popup>
 		
 	</view>
 </template>
@@ -61,23 +69,6 @@
 		data(){
 			return {
 				title:"网店观夏tosummer",
-				list:[{
-						id: 'view',
-						name: '视图容器',
-						open: false,
-						pages: [
-							'view',
-							'scroll-view'
-						]
-					},
-					{
-						id: 'content',
-						name: '基础内容',
-						open: false,
-						pages: ['text','rich-text','progress']
-						
-					},
-				],
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '../../../static/index/pic1.jpg',
@@ -105,45 +96,90 @@
 				indicatorDots: true,
 				autoplay: true,
 				interval: 4000,
-				duration: 500
+				duration: 500,
+				data: [],
+				loadMoreText: "加载中...",
+				showLoadMore: false,
+				max: 0
 			}
 		},
 		onLoad() {
+			this.initData();
+		},
+		onUnload() {
+			this.max = 0,
+			this.data = [],
+			this.loadMoreText = "加载更多",
+			this.showLoadMore = false;
+		},
+		onReachBottom() {
+			console.log("onReachBottom");
+			if (this.max > 40) {
+				this.loadMoreText = "没有更多数据了!"
+				return;
+			}
+			this.showLoadMore = true;
+			setTimeout(() => {
+				this.setListData();
+			}, 300);
+		},
+		onPullDownRefresh() {
+			console.log('onPullDownRefresh');
+			this.initData();
 		},
 		methods:{
-			triggerCollapse(e){
-				if (!this.list[e].pages) {
-				    this.goDetailPage(this.list[e].url);
-				    return;
-				}
-				for (var i = 0; i < this.list.length; ++i) {
-				    if (e === i) {
-				        this.list[i].open = !this.list[e].open;
-				    } else {
-				        this.list[i].open = false;
-				    }
-				}
-			},
-			goDetailPage(e){
-				if (typeof e === 'string') {
-				    uni.navigateTo({
-				        url: '/pages/component/' + e + '/' + e
-				    })
-				} else {
-				    uni.navigateTo({
-				        url: e.url
-				    })
-				}
-			},
-			change(e) {
-				this.current = e.detail.current
-			},
 			getDiscont(e){
 				uni.showToast({
 					title:'已领取',
-					duration:1500
+					icon: 'none'
 				})
 			},
+			initData(){
+				setTimeout(() => {
+					this.max = 0;
+					this.data = [];
+					let data = [];
+					this.max += 10;
+					for (var i = this.max - 9; i < this.max + 1; i++) {
+						
+						let item = [];
+						for(var j = 0; j <= 1; j++ )
+						{
+							let info = {
+								url:'../../../static/shop/item1.jpg',
+								price:10 + j,
+								desc:'年度限定-西溪桃花香氛礼盒（关注观夏微信公众号，获取礼包）'
+							};
+							item.push(info)
+						}
+						data.push(item)
+					}
+					this.data = this.data.concat(data);
+					uni.stopPullDownRefresh();
+				}, 300);
+			},
+			setListData() {
+				let data = [];
+				this.max += 10;
+				for (var i = this.max - 9; i < this.max + 1; i++) {
+					let item = [];
+					for(var j = 0; j <= 1; j++ )
+					{
+						let info = {
+							url:'../../../static/shop/item2.jpg',
+							price:1 + j,
+							desc:'年度限定-西溪桃花香氛礼盒（关注观夏微信公众号，获取礼包）'
+						};
+						item.push(info)
+					}
+					data.push(item)
+				}
+				this.data = this.data.concat(data);
+			},
+			buyGoods(e)
+			{
+				this.$refs.popupShare.open()
+			}
 		}
 	}
 </script>
@@ -204,5 +240,15 @@
 		text-align: center;
 		color: #000000;
 	}
-
+	.topic_cont_text{
+		padding: 10upx;
+		overflow: hidden;
+		word-break: break-all;  /* break-all(允许在单词内换行。) */
+		text-overflow: ellipsis;  /* 超出部分省略号 */
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 2; /** 显示的行数 **/
+		color: #8b8b8b;
+		font-size: 32rpx;
+	}
 </style>
