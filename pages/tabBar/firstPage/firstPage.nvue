@@ -57,8 +57,8 @@
 			<view class="uni-loadmore" v-if="showLoadMore" style="align-items: center; color: #8f8f8f;">{{loadMoreText}}</view>
 		</view>
 		
-		<uni-popup id="popupShare" ref="popupShare" type="share">
-			<ts-popup-shop-car selectGoodsData = "selectGoodsData"></ts-popup-shop-car>
+		<uni-popup id="popupShare" ref="popupShare" type="share" @change="change">
+			<ts-popup-shop-car ref="shopCar" :selectGoodsData = "selectGoodsData" :initFunc = "initFunc"></ts-popup-shop-car>
 		</uni-popup>
 		
 	</view>
@@ -192,8 +192,12 @@
 			buyGoods(e)
 			{
 				this.selectGoodsData = e
-				console.log(e.price)
 				this.$refs.popupShare.open()
+			},
+			change(e)
+			{
+				console.log(e.type,e.show)
+				this.$refs.shopCar.initData()
 			}
 		}
 	}

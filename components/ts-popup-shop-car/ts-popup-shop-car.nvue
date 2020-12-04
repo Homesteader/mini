@@ -3,13 +3,13 @@
 		<view class="uni-share-content">
 			<view style="flex-direction:row;margin-left: 30rpx;margin-top: 10rpx;">
 				<view style="width: 30%;">
-					<image style="width: 100%;height: 200rpx;" src="../../static/shop/item3.jpg" mode="scaleToFill"></image>
+					<image style="width: 100%;height: 200rpx;" :src=selectGoodsData.url mode="scaleToFill"></image>
 				</view>
 				<view style="width: 70%;margin-left: 8rpx;">
 					<view style="height: 30%;"/>
-					<text style="color: #74bb7a; font-size: 40rpx;">{{price}}</text>
+					<text style="color: #74bb7a; font-size: 40rpx;">{{"￥"+selectGoodsData.price}}</text>
 					<view style="height: 95rpx;">
-						<text class="topic_cont_text">{{"已选择 主香调：雨后新竹香气；下单后3-5天发出，近期配送时效延长。"}}</text>
+						<text class="topic_cont_text">{{"已选择 " + selectGoodsData.name + "，" + selectGoodsData.info}}</text>
 					</view>
 				</view>
 			</view>
@@ -17,14 +17,14 @@
 			<view style="margin-left: 30rpx;margin-top: 20rpx;">
 				<text style="color: #000000; font-weight:550;font-size: 36rpx;">商品属性</text>
 				<view style="margin-top: 20rpx; background-color: #f1f8f1; width: 350rpx; height: 70rpx;flex-direction:inherit;align-items: center;">
-					<text style="color: #3fb83f;font-size: 30rpx;margin-top: 14rpx;">主香调：雨后新竹香气</text>
+					<text style="color: #3fb83f;font-size: 30rpx;margin-top: 14rpx;">{{selectGoodsData.name}}</text>
 				</view>
 			</view>
 			<view class="link-top"></view>
 			<view style="margin-left: 30rpx;margin-top: 20rpx;">
 				<text style="color: #000000; font-weight:550;font-size: 36rpx;">发货时效</text>
 				<view style="margin-top: 20rpx; background-color: #f1f8f1; width: 570rpx; height: 70rpx;flex-direction:inherit;align-items: center;">
-					<text style="color: #3fb83f;font-size: 30rpx;margin-top: 14rpx;">下单后3-5天发出，近期配送时效延长。</text>
+					<text style="color: #3fb83f;font-size: 30rpx;margin-top: 14rpx;">{{selectGoodsData.info}}</text>
 				</view>
 			</view>
 			<view class="link-top"></view>
@@ -34,16 +34,16 @@
 				</view>
 			
 				<view style="width: 55%;height: 100%;flex-direction: row;align-items: center;">
-					<text style="color: #3fb83f;font-size: 30rpx;">每人限购5件</text>
-					<view style="margin-left: 15rpx;border-radius: 10rpx;width: 60rpx;height: 60rpx;background-color: #f2f3f5;flex-direction: inherit;">
+					<text style="color: #3fb83f;font-size: 30rpx;">{{"每人限购" + selectGoodsData.limitMax + "件"}}</text>
+					<view class="DelBtn" :style="{'background-color':delbtnColor}" @click="DelCount()">
 						<view class="line-jian"/>
 					</view>
 					<view style="margin-left: 5rpx;width: 60rpx;height: 60rpx;background-color: #f2f3f5;flex-direction: inherit;">
 						<view style="flex-direction: inherit;width: 40%;margin-left: 35%;">
-							<text style="color: #909090;align-self: center;">5</text>
+							<text style="color: #909090;align-self: center;">{{count}}</text>
 						</view>
 					</view>
-					<view style="margin-left: 5rpx;border-radius: 10rpx;width: 60rpx;height: 60rpx;background-color: #f2f3f5;flex-direction: inherit;">
+					<view class="AddBtn" :style="{'background-color':addbtnColor}" @click="AddCount()">
 						<view style="flex-direction: inherit;width: 40%;margin-left: 30%">
 							<text style="color: #000000;align-self: center;">+</text>
 						</view>
@@ -53,10 +53,10 @@
 			<view style="height: 30px"/>
 			<view style="height: 10%;flex-direction: row;"> 
 				<view style="width: 50%;height: 100rpx;">
-					<image style="width: 95%;height: 100%;align-self: flex-end;" src="../../static/buy/add.png"/>
+					<image style="width: 95%;height: 100%;align-self: flex-end;" src="../../static/buy/add.png" @click="AddToCar"/>
 				</view>
 				<view style="width: 50%;height: 100rpx;">
-					<image style="width: 95%;height: 100%;align-self: flex-start;" src="../../static/buy/buy.png"/>
+					<image style="width: 95%;height: 100%;align-self: flex-start;" src="../../static/buy/buy.png" @click="Buy"/>
 				</view>
 			</view>
 		</view>
@@ -68,22 +68,80 @@
 		props: {
 			selectGoodsData: {
 				default: []
-			}
+			},
 		},
 		data() {
 			return {
-				price:this.selectGoodsData.price
+				count:0,
+				addbtnColor:"#f2f3f5",
+				delbtnColor:"#a1a1a1"
 			}
 		},
-		onLoad() {
-			console.log(this.selectGoodsData)
+		inject: ['popup'],
+		beforeCreate(){
+			console.log("beforeCreate")
 		},
+		onShow() {
+			console.log("onShowx")
+		},
+				
+		created() {
+			console.log("createdxxxxxxxxx")
+		},
+		
+		mounted(){
+			console.log("mountedxxxxxxxxx")
+		},
+		
 		methods: {
 			/**
 			 * 关闭窗口
 			 */
 			close() {
+				console.log("close")
 				this.popup.close()
+			},
+			open() {
+				console.log("open")
+			},
+			initData(){
+				this.count = 0
+				this.addbtnColor="#f2f3f5"
+				this.delbtnColor="#a1a1a1"
+			},
+			
+			AddCount(){
+				if(this.count >= this.selectGoodsData.limitMax)
+				{
+					return;
+				}
+				this.count++;
+				this.UpdateBtnState();
+			},
+			DelCount(){
+				if(this.count <= 0)
+				{
+					return;
+				}
+				this.count--;
+				this.UpdateBtnState();
+			},
+			UpdateBtnState()
+			{
+				this.addbtnColor = this.count >= this.selectGoodsData.limitMax ?"#a1a1a1":"#f2f3f5";
+				this.delbtnColor = this.count <= 0 ?"#a1a1a1":"#f2f3f5";
+			},
+			AddToCar(){
+				uni.showToast({
+					title:this.selectGoodsData.name+"加入到了购物车",
+					icon:'none'
+				})
+			},
+			Buy(){
+				uni.showToast({
+					title:"购买成功",
+					icon:'none'
+				})
 			}
 		}
 	}
@@ -189,5 +247,23 @@
 		border-top: solid #909090 1px;
 		align-self: center;
 		margin-left: 25%;
+	}
+	
+	.AddBtn {
+		margin-left: 5rpx;
+		border-radius: 10rpx;
+		width: 60rpx;
+		height: 60rpx;
+		background-color: #f2f3f5;
+		flex-direction: inherit
+	}
+	
+	.DelBtn {
+		margin-left: 15rpx;
+		border-radius: 10rpx;
+		width: 60rpx;
+		height: 60rpx;
+		background-color: #f2f3f5;
+		flex-direction: inherit;
 	}
 </style>
